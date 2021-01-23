@@ -5,6 +5,9 @@ inputs:
   branch:
     description: "What branch to push results to"
     required: true
+  token:
+    description: "Github token"
+    required: true
 branding:
   icon: 'arrow-up-circle'
   color: 'red'

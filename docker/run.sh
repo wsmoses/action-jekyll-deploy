@@ -13,9 +13,21 @@ jekyll build
 echo '🧪 Deploy build'
 
 cd /srv/jekyll/_site
-git init .
+
+
+TEMP=/tmp/jgdb
+mkdir $TEMP
+
+git config --global user.name "${GITHUB_ACTOR}"
+git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+git clone https://${GITHUB_ACTOR}:${INPUT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TEMP} -b $1 --depth 1
+cd ${TEMP}
+# find . -not -path "./.git*" -not -path "." -exec rm -rf {} \;
+find . -depth -not -path "./.git*" -not -path "." -exec rm -rf {} \;
+cp -r -T /srv/jekyll/_site/ ${TEMP}/
+
 git add .
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-git commit -am "🧪 Deploy with ${GITHUB_WORKFLOW} $(date)" --allow-empty
-git push --all -f https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $1
+git add *
+git commit -am "new version $(date)" --allow-empty
+git push origin $1

@@ -13,11 +13,13 @@ RUN wget https://github.com/dawbarton/pdf2svg/archive/v0.2.3.tar.gz &&\
       cd pdf2svg-0.2.3 &&\
       ./configure --prefix=/usr/local &&\
       make -j`nproc`&&\
-      make install -j`nproc`
+      make install -j`nproc` && cd .. && rm -rf *.tar.gz pdf2svg-0.2.3
 
 ENV PATH /usr/local/bin:$PATH
 
 COPY run.sh /
 COPY live.sh /
+RUN chmod +x /run.sh
+RUN chmod +x /live.sh
 
 ENTRYPOINT ["/run.sh"]
