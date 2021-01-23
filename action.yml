@@ -10,7 +10,7 @@ branding:
   color: 'red'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://wsmoses/jekyll:latest'
   args:
     - ${{ inputs.branch }}
   env:

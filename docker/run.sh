@@ -5,8 +5,9 @@ set -e
 set -o pipefail
 # ln -s /github/workspace /srv/jekyll
 
-cp -r /github/workspace /srv/jekyll
-cd /srv/jekyll
+cp -r -T /github/workspace /srv/jekyll
+cd /srv/jekyll/
+chown -R jekyll .
 jekyll build
 
 echo '🧪 Deploy build'
