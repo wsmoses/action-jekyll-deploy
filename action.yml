@@ -16,3 +16,4 @@ runs:
   env:
     JEKYLL_UID: 0
     JEKYLL_GID: 0
+    JEKYLL_ROOTLESS: 1

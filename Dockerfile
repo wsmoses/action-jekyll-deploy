@@ -1,7 +1,7 @@
 FROM jekyll/jekyll
 RUN gem install jekyll-scholar
 
-USER root
+# USER root
 
 RUN echo "ipv6" >> /etc/modules
 RUN sed -i -e 's/v3\.7/edge/g' /etc/apk/repositories
